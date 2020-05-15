@@ -41,21 +41,29 @@ int main(){
 	}
 	
 	for(int i=0;i<SIZE;i++){
+		//입력한 이름 학과 구조체에 복사 
 			strcpy(x[i].name,tName[i]);
 			strcpy(x[i].major,tMajor[i]);
-			
+		
+		//주민등록번호  월  가져오기	
 			strncpy(change,tBirth[i]+2,2);
+		//문자열 정수형으로 형변환 
 			month[i]=atoi(change);
+			
 			strncpy(change,tBirth[i]+4,2);
 			day[i]=atoi(change);
-			
+		
+		//주민등록번호 7번째 번호보고 년도 성별 국적 구하는 함수	
 			formData(tBirth[i][7],i);
 			
 	}
+	
+	//생년월일 오름차순 정렬하기 
 	bubble();
 	
 	for(int i=0;i<SIZE;i++){
 			//	x[i].birthDay=year[i]+"년 "+month[i]+"월 "+day[i]+"일"; 
+			//생년월일 담기 
 			sprintf(x[i].birthDay,"%d년 %d월 %d일",year[i],month[i],day[i]);
 			printf("이름: %s 생년월일 : %s 윤년 여부 : %c 출생지역 : %s 성별 : %c 학과: %s \n",x[i].name,x[i].birthDay,x[i].check,x[i].area,x[i].gender,x[i].major); 
 	}
@@ -100,6 +108,7 @@ void swap(int size){
 	month[size+1]=changeMonth;
 	day[size+1]=changeDay;
 	
+	//구조체 복사 
 	memcpy(&x[4],&x[size],sizeof(struct member));
 	memcpy(&x[size],&x[size+1],sizeof(struct member));
 	memcpy(&x[size+1],&x[4],sizeof(struct member));
